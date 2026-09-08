@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# esh.ollama CLI wrapper
+set -euo pipefail
+
+ollama_bin="/usr/bin/ollama"
+if [[ ! -x "$ollama_bin" ]]; then
+  printf 'esh.ollama: %s is not installed\n' "$ollama_bin" >&2
+  exit 127
+fi
+
+endpoint_file="$HOME/.config/omarchy/esh.ollama/active-endpoint"
+endpoint="http://127.0.0.1:11434"
+if [[ -r "$endpoint_file" ]]; then
+  configured_endpoint=$(tr -d '[:space:]' < "$endpoint_file")
+  if [[ "$configured_endpoint" == http://* || "$configured_endpoint" == https://* ]]; then
+    endpoint="$configured_endpoint"
+  fi
+fi
+
+OLLAMA_HOST="$endpoint" exec "$ollama_bin" "$@"
