@@ -17,10 +17,11 @@ The plugin runs without root privileges. It writes endpoint state under `~/.conf
 
 ```sh
 omarchy plugin add https://github.com/ESHAYAT102/ollama-omarchy-plugin.git --enable
-~/.config/omarchy/plugins/esh.ollama/install.sh
 ```
 
-The second command installs a guarded CLI wrapper at `~/.local/bin/ollama`. It refuses to overwrite an unrelated file. Omarchy places `~/.local/bin` before `/usr/bin` by default; open a new terminal after installation.
+When enabled, the plugin installs a guarded CLI wrapper at `~/.local/bin/ollama`. It refuses to overwrite an unrelated file and refreshes its own wrapper after plugin updates. Omarchy places `~/.local/bin` before `/usr/bin` by default; open a new terminal after installation.
+
+If an unrelated `~/.local/bin/ollama` already exists, move or remove it and reload the plugin. You can also run `~/.config/omarchy/plugins/esh.ollama/install.sh` directly.
 
 ## Configure The Remote Machine
 

@@ -15,6 +15,7 @@ BarWidget {
   property bool firstRunPromptPending: false
 
   readonly property string scriptPath: Quickshell.env("HOME") + "/.config/omarchy/plugins/esh.ollama/set-endpoint.sh"
+  readonly property string installScriptPath: Quickshell.env("HOME") + "/.config/omarchy/plugins/esh.ollama/install.sh"
   readonly property bool usingRemote: remoteEndpoint !== "" && endpoint === remoteEndpoint
   readonly property bool opened: panelLoader.item ? panelLoader.item.opened === true : false
   readonly property bool popoutSwitchClosing: panelLoader.item ? panelLoader.item.popoutSwitchClosing === true : false
@@ -98,6 +99,11 @@ BarWidget {
 
   Process { id: writer }
 
+  Process {
+    id: wrapperInstaller
+    command: [root.installScriptPath]
+  }
+
   Timer {
     id: firstRunTimer
     interval: 500
@@ -115,6 +121,7 @@ BarWidget {
   }
 
   Component.onCompleted: {
+    wrapperInstaller.running = true
     activeReader.running = true
     remoteReader.running = true
   }

@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "esh.ollama",
   "name": "Ollama Switcher",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Eshayat Al-Wasiu",
   "license": "MIT",
   "description": "Switch Ollama between the local daemon and a remote instance from the Omarchy bar.",
